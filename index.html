@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chá de Casa Nova - Convite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="./code.js" defer></script>
+    <div class="container">
+        <i class="fas fa-sunflower sunflower-bg sunflower-1"></i>
+        <i class="fas fa-sunflower sunflower-bg sunflower-2"></i>
+        
+        <header>
+            <h1>Chá de Casa Nova</h1>
+            <p class="intro">Estamos inaugurando nosso novo lar e sua presença é muito especial!</p>
+            <p class="intro">Celebre conosco este momento tão especial</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="housewarming-form">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user sunflower-small"></i> Qual o seu nome?</label>
+                    <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-check sunflower-small"></i> Você vai conseguir participar da nossa festa da casa nova?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="presence-yes" name="presence" value="sim" required>
+                            <label for="presence-yes">Sim, com certeza!</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="presence-no" name="presence" value="nao">
+                            <label for="presence-no">Infelizmente não poderei</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-gift sunflower-small"></i> O que você gostaria de levar? (Obrigatório levar bebida)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="item-salgados" name="items" value="salgados">
+                            <label for="item-salgados">Salgados</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="item-doces" name="items" value="doces">
+                            <label for="item-doces">Doces</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="item-outros" name="items" value="outros">
+                            <label for="item-outros">Outros</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <label for="bebidas">Qual bebida irá trazer?</label>
+                            <select id="bebidas" name="bebidas" required>
+                                <option value="" selected disabled>Selecione uma opção</option>
+                                <option value="1">Refrigerante</option>
+                                <option value="2">Suco</option>
+                                <option value="3">Água</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="text" id="outros-especificar" name="outros_especificar" placeholder="Por favor, especifique o que gostaria de levar" class="hidden" style="margin-top: 15px;">
+                </div>
+                
+                <div class="form-group">
+                    <label for="people"><i class="fas fa-users sunflower-small"></i> Quantas pessoas comparecerão?</label>
+                    <select id="people" name="people" required>
+                        <option value="" selected disabled>Selecione uma opção</option>
+                        <option value="1">Apenas eu</option>
+                        <option value="2">2 pessoas</option>
+                        <option value="3">3 pessoas</option>
+                        <option value="4">4 pessoas</option>
+                        <option value="5">5 ou mais pessoas</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="allergy"><i class="fas fa-allergies sunflower-small"></i> Você tem alguma alergia ou restrição alimentar?</label>
+                    <input type="text" id="allergy" name="allergy" placeholder="Se sim, por favor especifique">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-heart sunflower-small"></i> Deixe uma mensagem de carinho para os noivos e para o novo lar!</label>
+                    <textarea id="message" name="message" placeholder="Escreva aqui sua mensagem especial..."></textarea>
+                </div>
+                
+                <button type="submit"><i class="fas fa-paper-plane"></i> Enviar Confirmação</button>
+            </form>
+        </div>
+        
+        <div id="confirmation" class="hidden">
+            <h2>Obrigado pela confirmação!</h2>
+            <div class="heart">❤️</div>
+            <p>Sua resposta foi registrada e estamos ansiosos para celebrar com você!</p>
+            <p>Em breve enviaremos mais detalhes sobre o evento.</p>
+        </div>
+        
+        <footer>
+            <p><i class="fas fa-sunflower sunflower-small"></i> Com carinho, os moradores da nova casa! <i class="fas fa-sunflower sunflower-small"></i></p>
+        </footer>
+    </div>
+</body>
+</html>
