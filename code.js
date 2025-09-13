@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outrosInput = document.getElementById('outros-especificar');
     const peopleSelect = document.getElementById('people');
     const peopleNamesDiv = document.getElementById('people-names');
-    const API_URL = 'https://cha-casa-nova-backend.onrender.com';
+    const API_URL = 'https://chacasanovaback-production.up.railway.app/';
 
     // Mostrar campo "Outros" quando selecionado
     outrosCheckbox.addEventListener('change', function() {
