@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outrosInput = document.getElementById('outros-especificar');
     const peopleSelect = document.getElementById('people');
     const peopleNamesDiv = document.getElementById('people-names');
-    const API_URL = 'https://cha-casa-nova-backend.onrender.com';
+    const API_URL = 'https://chacasanovaback-production.up.railway.app/';
 
     // Mostrar campo "Outros" quando selecionado
     outrosCheckbox.addEventListener('change', function() {
@@ -78,19 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch(`${API_URL}/enviar-confirmacao`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    name,
-                    presence,
-                    items,
-                    bebidas,
-                    people,
-                    allergy,
-                    message,
-                    outros,
-                    peopleNames
-                })
+                body: JSON.stringify(formData)
             });
             
             const result = await response.json();
