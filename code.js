@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outrosInput = document.getElementById('outros-especificar');
     const peopleSelect = document.getElementById('people');
     const peopleNamesDiv = document.getElementById('people-names');
-    const API_URL = 'https://chacasanovaback-production.up.railway.app'; // REMOVI A BARRA FINAL
+    const API_URL = 'https://chacasanovaback-production.up.railway.app';
 
     // Mostrar campo "Outros" quando selecionado
     outrosCheckbox.addEventListener('change', function() {
@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         let qtd = parseInt(this.value);
         if (isNaN(qtd) || qtd < 1) return;
         
-        // Para "5 ou mais", mostra 5 campos e um aviso
         if (qtd === 5) {
             qtd = 5;
             const aviso = document.createElement('small');
