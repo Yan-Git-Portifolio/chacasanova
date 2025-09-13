@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const outrosInput = document.getElementById('outros-especificar');
     const peopleSelect = document.getElementById('people');
     const peopleNamesDiv = document.getElementById('people-names');
-    const API_URL = 'https://chacasanovaback-production.up.railway.app/';
+    const API_URL = 'https://chacasanovaback-production.up.railway.app'; // REMOVI A BARRA FINAL
 
     // Mostrar campo "Outros" quando selecionado
     outrosCheckbox.addEventListener('change', function() {
