@@ -15,7 +15,30 @@ document.addEventListener('DOMContentLoaded', function() {
             outrosInput.value = '';
         }
     });
-    
+    const peopleSelect = document.getElementById('people');
+    const peopleNamesDiv = document.getElementById('people-names');
+
+    peopleSelect.addEventListener('change', function() {
+        peopleNamesDiv.innerHTML = '';
+        let qtd = parseInt(this.value);
+        if (isNaN(qtd) || qtd < 1) return;
+        // Para "5 ou mais", mostra 5 campos e um aviso
+        if (qtd === 5) {
+            qtd = 5;
+            const aviso = document.createElement('small');
+            aviso.textContent = 'Se forem mais de 5, preencha os 5 campos com os nomes principais.';
+            peopleNamesDiv.appendChild(aviso);
+        }
+        for (let i = 1; i <= qtd; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `person_name_${i}`;
+            input.placeholder = `Nome da pessoa ${i}`;
+            input.required = true;
+            input.style.marginTop = '8px';
+            peopleNamesDiv.appendChild(input);
+        }
+    });
     // Processar envio do formulário
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -57,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
         whatsappMessage += `*Nome:* ${name}%0A`;
         whatsappMessage += `*Presença:* ${presence === 'sim' ? 'Sim, com certeza!' : 'Infelizmente não poderei'}%0A`;
         
+        const peopleNames = Array.from(document.querySelectorAll('#people-names input')).map(input => input.value).filter(Boolean);
+
         if (presence === 'sim') {
             // Processar itens selecionados
             let selectedItems = [];
@@ -69,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `*Itens para levar:* ${selectedItems.join(', ') || 'Nenhum selecionado'}%0A`;
             whatsappMessage += `*Bebida:* ${bebidaOptions[bebidas] || bebidas}%0A`;
             whatsappMessage += `*Número de pessoas:* ${peopleOptions[people] || people}%0A`;
+            whatsappMessage += `*Nomes dos presentes:* ${peopleNames.join(', ')}%0A`;
             
             if (allergy) {
                 whatsappMessage += `*Alergia/Restrição:* ${allergy}%0A`;
