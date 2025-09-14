@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             outrosInput.value = '';
         }
     });
+<<<<<<< HEAD
 
     // Gerenciar nomes das pessoas
     peopleSelect.addEventListener('change', function() {
@@ -43,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+=======
+    
+>>>>>>> parent of 243b1de (nome dos convidados)
     // Processar envio do formulário
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -51,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         
+<<<<<<< HEAD
         try {
             // Validações
             const checkboxes = document.querySelectorAll('input[name="items"]:checked');
@@ -105,6 +110,50 @@ document.addEventListener('DOMContentLoaded', function() {
             // Verificar se a resposta é JSON válido
             const text = await response.text();
             let result;
+=======
+        // Coletar dados do formulário
+        const name = document.getElementById('name').value;
+        const presence = document.querySelector('input[name="presence"]:checked').value;
+        const items = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(cb => cb.value);
+        const bebidas = document.getElementById('bebidas').value;
+        const people = document.getElementById('people').value;
+        const allergy = document.getElementById('allergy').value;
+        const message = document.getElementById('message').value;
+        const outros = document.getElementById('outros-especificar').value;
+        
+        // Mapear valores para textos mais amigáveis
+        const bebidaOptions = {
+            '1': 'Refrigerante',
+            '2': 'Suco',
+            '3': 'Água'
+        };
+        
+        const peopleOptions = {
+            '1': 'Apenas eu',
+            '2': '2 pessoas',
+            '3': '3 pessoas',
+            '4': '4 pessoas',
+            '5': '5 ou mais pessoas'
+        };
+        
+        // Preparar texto para WhatsApp
+        let whatsappMessage = `*Confirmação de Presença - Chá de Casa Nova*%0A%0A`;
+        whatsappMessage += `*Nome:* ${name}%0A`;
+        whatsappMessage += `*Presença:* ${presence === 'sim' ? 'Sim, com certeza!' : 'Infelizmente não poderei'}%0A`;
+        
+        if (presence === 'sim') {
+            // Processar itens selecionados
+            let selectedItems = [];
+            items.forEach(item => {
+                if (item === 'salgados') selectedItems.push('Salgados');
+                if (item === 'doces') selectedItems.push('Doces');
+                if (item === 'outros' && outros) selectedItems.push(`Outros: ${outros}`);
+            });
+            
+            whatsappMessage += `*Itens para levar:* ${selectedItems.join(', ') || 'Nenhum selecionado'}%0A`;
+            whatsappMessage += `*Bebida:* ${bebidaOptions[bebidas] || bebidas}%0A`;
+            whatsappMessage += `*Número de pessoas:* ${peopleOptions[people] || people}%0A`;
+>>>>>>> parent of 243b1de (nome dos convidados)
             
             try {
                 result = JSON.parse(text);
