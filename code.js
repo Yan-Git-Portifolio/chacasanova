@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const peopleNamesDiv = document.getElementById('people-names');
     const API_URL = 'https://chacasanovaback-production.up.railway.app';
 
+    const peopleSelect = document.getElementById('people');
+    const peopleNamesDiv = document.getElementById('people-names');
+    const API_URL = 'https://chacasanovaback-production.up.railway.app';
+
     // Mostrar campo "Outros" quando selecionado
     outrosCheckbox.addEventListener('change', function() {
         if(this.checked) {
@@ -47,7 +51,37 @@ document.addEventListener('DOMContentLoaded', function() {
 =======
     
 >>>>>>> parent of 243b1de (nome dos convidados)
+<<<<<<< HEAD
+
+    // Gerenciar nomes das pessoas
+    peopleSelect.addEventListener('change', function() {
+        peopleNamesDiv.innerHTML = '';
+        let qtd = parseInt(this.value);
+        if (isNaN(qtd) || qtd < 1) return;
+        
+        if (qtd === 5) {
+            qtd = 5;
+            const aviso = document.createElement('small');
+            aviso.textContent = 'Se forem mais de 5, preencha os 5 campos com os nomes principais.';
+            peopleNamesDiv.appendChild(aviso);
+        }
+        
+        for (let i = 1; i <= qtd; i++) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = `person_name_${i}`;
+            input.placeholder = `Nome da pessoa ${i}`;
+            input.required = true;
+            input.style.marginTop = '8px';
+            peopleNamesDiv.appendChild(input);
+        }
+    });
+
+=======
+    
+>>>>>>> parent of 243b1de (nome dos convidados)
     // Processar envio do formulário
+    form.addEventListener('submit', async function(e) {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
