@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             outrosInput.value = '';
         }
     });
+<<<<<<< HEAD
 
     // Gerenciar nomes das pessoas
     peopleSelect.addEventListener('change', function() {
@@ -44,24 +45,73 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+=======
+    
+>>>>>>> parent of 243b1de (nome dos convidados)
     // Processar envio do formulário
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Validar se pelo menos um item foi selecionado
-        const checkboxes = document.querySelectorAll('input[name="items"]:checked');
-        if (checkboxes.length === 0) {
-            alert('Por favor, selecione pelo menos um item que gostaria de levar.');
-            return;
-        }
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
         
-        // Validar se selecionou uma bebida
-        const bebidasSelect = document.getElementById('bebidas');
-        if (!bebidasSelect.value) {
-            alert('Por favor, selecione qual bebida irá trazer.');
-            return;
-        }
-        
+<<<<<<< HEAD
+        try {
+            // Validações
+            const checkboxes = document.querySelectorAll('input[name="items"]:checked');
+            if (checkboxes.length === 0) {
+                throw new Error('Por favor, selecione pelo menos um item que gostaria de levar.');
+            }
+            
+            const bebidasSelect = document.getElementById('bebidas');
+            if (!bebidasSelect.value) {
+                throw new Error('Por favor, selecione qual bebida irá trazer.');
+            }
+            
+            if (!peopleSelect.value) {
+                throw new Error('Por favor, selecione quantas pessoas comparecerão.');
+            }
+            
+            // Validar nomes se tiver mais de 1 pessoa
+            const peopleValue = parseInt(peopleSelect.value);
+            if (peopleValue > 1) {
+                const peopleInputs = document.querySelectorAll('#people-names input');
+                const emptyNames = Array.from(peopleInputs).filter(input => !input.value.trim());
+                
+                if (emptyNames.length > 0) {
+                    throw new Error('Por favor, preencha os nomes de todas as pessoas.');
+                }
+            }
+            
+            // Coletar dados CORRETAMENTE
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                presence: document.querySelector('input[name="presence"]:checked').value,
+                items: Array.from(document.querySelectorAll('input[name="items"]:checked')).map(cb => cb.value),
+                bebidas: document.getElementById('bebidas').value,
+                people: document.getElementById('people').value,
+                allergy: document.getElementById('allergy').value.trim(),
+                message: document.getElementById('message').value.trim(),
+                outros: document.getElementById('outros-especificar').value.trim(),
+                peopleNames: Array.from(document.querySelectorAll('#people-names input')).map(input => input.value.trim()).filter(Boolean)
+            };
+            
+            console.log('📤 Enviando dados:', formData);
+            
+            // Enviar para backend - CORRIGIDO!
+            const response = await fetch(`${API_URL}/enviar-confirmacao`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            // Verificar se a resposta é JSON válido
+            const text = await response.text();
+            let result;
+=======
         // Coletar dados do formulário
         const name = document.getElementById('name').value;
         const presence = document.querySelector('input[name="presence"]:checked').value;
@@ -92,8 +142,6 @@ document.addEventListener('DOMContentLoaded', function() {
         whatsappMessage += `*Nome:* ${name}%0A`;
         whatsappMessage += `*Presença:* ${presence === 'sim' ? 'Sim, com certeza!' : 'Infelizmente não poderei'}%0A`;
         
-        const peopleNames = Array.from(document.querySelectorAll('#people-names input')).map(input => input.value).filter(Boolean);
-
         if (presence === 'sim') {
             // Processar itens selecionados
             let selectedItems = [];
@@ -106,10 +154,13 @@ document.addEventListener('DOMContentLoaded', function() {
             whatsappMessage += `*Itens para levar:* ${selectedItems.join(', ') || 'Nenhum selecionado'}%0A`;
             whatsappMessage += `*Bebida:* ${bebidaOptions[bebidas] || bebidas}%0A`;
             whatsappMessage += `*Número de pessoas:* ${peopleOptions[people] || people}%0A`;
-            whatsappMessage += `*Nomes dos presentes:* ${peopleNames.join(', ')}%0A`;
+>>>>>>> parent of 243b1de (nome dos convidados)
             
-            if (allergy) {
-                whatsappMessage += `*Alergia/Restrição:* ${allergy}%0A`;
+            try {
+                result = JSON.parse(text);
+            } catch (parseError) {
+                console.error('Resposta não é JSON:', text);
+                throw new Error('Resposta inválida do servidor');
             }
         }
         
